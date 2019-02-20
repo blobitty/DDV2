@@ -1,5 +1,7 @@
 package nyc.bbah.ddv2.network
 
+import nyc.bbah.ddv2.model.Restaurant
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -7,11 +9,11 @@ import retrofit2.http.Query
 interface RestaurantsService {
 
     @GET("restaurant/")
-    fun fetchRestaurantList(@Query("lat") lat: Long, @Query("lng") lng: Long,
-                            @Query("offset") offset: Int, @Query("limit") limit: Int)
+    fun fetchRestaurantList(@Query("lat") lat: Double?, @Query("lng") lng: Double?,
+                            @Query("offset") offset: Int, @Query("limit") limit: Int): Call<List<Restaurant>>
 
     @GET("restaurant/{restaurant_id}")
-    fun fetchSingleRestaurant(@Path("restaurant_id") restaurant_id: Int)
+    fun fetchSingleRestaurant(@Path("restaurant_id") restaurant_id: Int): Call<Restaurant>
 
     //compan
     object ApiUtils {
