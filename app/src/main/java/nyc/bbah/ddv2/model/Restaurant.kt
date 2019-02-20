@@ -1,35 +1,48 @@
 package nyc.bbah.ddv2.model
 
-data class Restaurant(val is_time_surging: Boolean?,
-                      val delivery_fee: Int?,
-                      val max_composite_score: Int?,
+import android.os.Parcel
+import android.os.Parcelable
+
+
+data class Restaurant(val delivery_fee: Int?,
                       val id: Int?,
-                      val merchant_promotions: MerchantPromotions?,
-                      val menus: Menus,
-                      val composite_score: Int?,
-                      val status_type: String?,
-                      val is_only_catering: Boolean?,
                       val status: String?,
-                      val number_of_ratings: Int?,
-                      val asap_time: Int?,
                       val description: String?,
-                      val business: Business?,
-                      val tags: List<String>?,
-                      val yelp_review_count: Int?,
-                      val business_id: Int?,
-                      val extra_sos_delivery_fee: Int?,
-                      val yelp_rating: Int?,
                       val cover_img_url: String?,
-                      val header_img_url: String?,
-                      val address: BizAddress,
-                      val price_range: Int?,
-                      val slug: String?,
-                      val name: String?,
-                      val is_newly_added: Boolean?,
-                      val url: String,
-                      val service_rate: Int?,
-                      val promotion: Boolean?,
-                      val featured_category_description: String?) {
+                      val name: String?): Parcelable {
+
+    constructor(parcel: Parcel) : this(
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(delivery_fee)
+        parcel.writeValue(id)
+        parcel.writeString(status)
+        parcel.writeString(description)
+        parcel.writeString(cover_img_url)
+        parcel.writeString(name)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Restaurant> {
+        override fun createFromParcel(parcel: Parcel): Restaurant {
+            return Restaurant(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Restaurant?> {
+            return arrayOfNulls(size)
+        }
+    }
 
 
 }
