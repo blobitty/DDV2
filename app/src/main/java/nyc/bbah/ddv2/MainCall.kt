@@ -13,11 +13,11 @@ import retrofit2.Response
 class MainCall(private val restaurantsService: RestaurantsService): MainContract.Network {
 
     lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var latitude: Double? = null
-    private var longitude: Double? = null
+    var latitude: Double? = null
+    var longitude: Double? = null
 
 
-    override fun restaurantListCall(lat: Double, lng: Double, offset: Int, limit: Int,
+    override fun restaurantListCall(lat: Double?, lng: Double?, offset: Int, limit: Int,
         onSuccess: (List<Restaurant>) -> Unit): Call<List<Restaurant>> {
 
         getUserLocations()

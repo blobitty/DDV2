@@ -8,7 +8,7 @@ interface MainContract {
     //inner interface for call to server used in main
     interface Network{
                             //
-        fun restaurantListCall(lat: Double, lng: Double, offset: Int, limit: Int, onSuccess: (List<Restaurant>) -> Unit): Call<List<Restaurant>>
+        fun restaurantListCall(lat: Double?, lng: Double?, offset: Int, limit: Int, onSuccess: (List<Restaurant>) -> Unit): Call<List<Restaurant>>
 
         fun singleRestaurantCall(restaurant_id: Int, onSuccess: (Restaurant) -> Unit): Call<Restaurant>
     }
