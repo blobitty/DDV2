@@ -8,14 +8,14 @@
 
     <ImageView
             android:id="@+id/restaurantlist_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="140dp"
+            android:layout_height="80dp"
             app:srcCompat="@mipmap/ic_launcher"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp"
-    />
+            android:contentDescription="@string/biz_image"/>
     <TextView
             android:id="@+id/restaurantname"
             android:text="@string/restaurant_name"
@@ -28,6 +28,7 @@
             android:padding="6dp"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="#BA000000"
             app:layout_constraintTop_toTopOf="parent"/>
     <TextView
             android:id="@+id/cuisine_tv"

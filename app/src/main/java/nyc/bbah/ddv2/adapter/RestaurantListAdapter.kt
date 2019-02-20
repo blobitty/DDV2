@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import nyc.bbah.ddv2.model.Restaurant
-import nyc.bbah.ddv2.viewmodel.RestaurantListViewHolder
+import nyc.bbah.ddv2.viewholder.RestaurantListViewHolder
 import nyc.bbah.ddv2.R.layout
 
 class RestaurantListAdapter(val items: List<Restaurant>) : RecyclerView.Adapter<RestaurantListViewHolder>() {

@@ -1,4 +1,4 @@
-package nyc.bbah.ddv2.viewmodel
+package nyc.bbah.ddv2.viewholder
 
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.View
