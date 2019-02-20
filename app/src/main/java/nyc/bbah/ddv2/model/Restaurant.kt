@@ -1,4 +1,35 @@
 package nyc.bbah.ddv2.model
 
-class Restaurant {
+data class Restaurant(val is_time_surging: Boolean?,
+                      val delivery_fee: Int?,
+                      val max_composite_score: Int?,
+                      val id: Int?,
+                      val merchant_promotions: MerchantPromotions?,
+                      val menus: Menus,
+                      val composite_score: Int?,
+                      val status_type: String?,
+                      val is_only_catering: Boolean?,
+                      val status: String?,
+                      val number_of_ratings: Int?,
+                      val asap_time: Int?,
+                      val description: String?,
+                      val business: Business?,
+                      val tags: List<String>?,
+                      val yelp_review_count: Int?,
+                      val business_id: Int?,
+                      val extra_sos_delivery_fee: Int?,
+                      val yelp_rating: Int?,
+                      val cover_img_url: String?,
+                      val header_img_url: String?,
+                      val address: BizAddress,
+                      val price_range: Int?,
+                      val slug: String?,
+                      val name: String?,
+                      val is_newly_added: Boolean?,
+                      val url: String,
+                      val service_rate: Int?,
+                      val promotion: Boolean?,
+                      val featured_category_description: String?) {
+
+
 }

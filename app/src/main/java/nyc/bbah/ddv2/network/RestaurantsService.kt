@@ -13,12 +13,13 @@ interface RestaurantsService {
     @GET("restaurant/{restaurant_id}")
     fun fetchSingleRestaurant(@Path("restaurant_id") restaurant_id: Int)
 
+    //compan
     object ApiUtils {
 
-        private const val BASE_URL = "http://prolific-interview.herokuapp.com/5bbe13b79f6d520009971394/"
+        private const val BASE_URL = "https://api.doordash.com//v2/"
 
         val restaurant_Service: RestaurantsService
-            get() = RetrofitClient.getClient(BASE_URL)!!.create(RestaurantsService::class.java)
+        get() = RetrofitClient.getClient(BASE_URL)!!.create(RestaurantsService::class.java)
     }
 
 }
