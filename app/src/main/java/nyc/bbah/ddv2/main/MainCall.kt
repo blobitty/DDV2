@@ -1,4 +1,4 @@
-package nyc.bbah.ddv2
+package nyc.bbah.ddv2.main
 
 import android.annotation.SuppressLint
 import android.location.Location
@@ -11,10 +11,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainCall(private val restaurantsService: RestaurantsService): MainContract.Network {
-
-    lateinit var fusedLocationClient: FusedLocationProviderClient
-    var latitude = 37.422740
-    var longitude: Double  = -122.139956
 
 
     override fun restaurantListCall(lat: Double?, lng: Double?, offset: Int, limit: Int,
@@ -51,14 +47,5 @@ class MainCall(private val restaurantsService: RestaurantsService): MainContract
         return call
     }
 
-    @SuppressLint("MissingPermission")
-    fun getUserLocations(){
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                latitude = location?.latitude!!
-                longitude = location.longitude
-            }
-        //fusedLocationClient
 
-    }
 }
