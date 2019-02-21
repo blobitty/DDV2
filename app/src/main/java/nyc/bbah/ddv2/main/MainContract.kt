@@ -1,4 +1,4 @@
-package nyc.bbah.ddv2
+package nyc.bbah.ddv2.main
 
 import nyc.bbah.ddv2.model.Restaurant
 import retrofit2.Call

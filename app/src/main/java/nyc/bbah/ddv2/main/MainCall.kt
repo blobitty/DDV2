@@ -1,4 +1,4 @@
-package nyc.bbah.ddv2
+package nyc.bbah.ddv2.main
 
 import android.annotation.SuppressLint
 import android.location.Location
