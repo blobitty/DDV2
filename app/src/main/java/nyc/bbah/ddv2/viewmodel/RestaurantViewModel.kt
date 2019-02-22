@@ -8,6 +8,7 @@ import android.location.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import io.reactivex.Single
 import io.reactivex.SingleEmitter
+import io.reactivex.disposables.Disposable
 import nyc.bbah.ddv2.main.RestaurantsRepository
 import nyc.bbah.ddv2.model.Restaurant
 import nyc.bbah.ddv2.network.RestaurantsService
@@ -16,6 +17,7 @@ class RestaurantViewModel : ViewModel(){
 
     lateinit var fusedLocationClient: FusedLocationProviderClient
     var restaurantsRepository = RestaurantsRepository(RestaurantsService.ApiUtils.restaurant_Service)
+
 
     sealed class NetworkResult<T> {
 
@@ -33,8 +35,8 @@ class RestaurantViewModel : ViewModel(){
     }
 
     @SuppressLint("CheckResult", "MissingPermission")
-    private fun loadRestaurants() {
-        Single.create<Location> { emitter: SingleEmitter<Location> ->
+    private fun loadRestaurants(): Disposable {
+        val disposable: Disposable = Single.create<Location> { emitter: SingleEmitter<Location> ->
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
                     location?.let { emitter.onSuccess(it) }
@@ -44,10 +46,18 @@ class RestaurantViewModel : ViewModel(){
         }.subscribe({
             // success
             restaurants.postValue(NetworkResult.Success(it))
+
         }, {
             // error
             restaurants.postValue(NetworkResult.Error(it))
         })
+        return disposable
+
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        loadRestaurants().dispose()
     }
 }
 
