@@ -24,8 +24,10 @@ class RestaurantListViewHolder(itemView: View?, private val navigator: Restauran
             .into(itemView.restaurantlist_imageView)
 
         //TODO: Extra Credit
-//        itemView.setOnClickListener {
-//            navigator.openDetail(restaurant)
-//        }
+        itemView.setOnClickListener {
+            navigator.openDetail(restaurant)
+        }
     }
+
+
 }
