@@ -11,35 +11,12 @@ import java.lang.StringBuilder
 class RestaurantListViewHolder(itemView: View?, private val navigator: RestaurantsNavigator): ViewHolder(itemView!!) {
 
 
-    fun onBind(restaurant: Restaurant){
-        val maxLength = 20
-        val shortDesc = StringBuilder()
-        //val shortName = StringBuilder()
+    fun onBind(restaurant: Restaurant ){
 
+        shortDescription(restaurant.description!!, itemView)
+        shortenName(restaurant.name!!, itemView)
+        checkStatus(restaurant.status!!, itemView)
 
-        //shorten cuisine string logic
-        if(restaurant.description!!.length > maxLength){
-            shortDesc.append(restaurant.description.substring(0, maxLength))
-            shortDesc.append("...")
-            itemView.cuisine_tv?.text = shortDesc.toString()
-        } else{
-            itemView.cuisine_tv?.text = restaurant.description
-        }
-
-        //shorten restaurant name logic
-        if (restaurant.name!!.contains("(")){
-            val index = restaurant.name.indexOf('(')
-            val shortName: String? = restaurant.name.substring(0, index)
-            itemView.restaurantname?.text = shortName
-        } else{
-            itemView.restaurantname?.text = restaurant.name
-        }
-        //check if status has time
-        if(restaurant.status!!.contains("Pre")){
-            itemView.asaptime_tv?.text = ""
-        } else{
-            itemView.asaptime_tv?.text = restaurant.status
-        }
 
         val imgUrl: String? = restaurant.cover_img_url
         Picasso
@@ -53,5 +30,42 @@ class RestaurantListViewHolder(itemView: View?, private val navigator: Restauran
         }
     }
 
+    //Logic to fix Strings for view
+    fun shortenName(str: String, itemView: View?): String?{
+        //shorten restaurant name logic
+        if (str.contains("(")){
+            val index = str.indexOf('(')
+            val shortName: String? = str.substring(0, index)
+            itemView?.restaurantname?.text = shortName
+            return shortName
+        } else{
+            itemView?.restaurantname?.text = str
+            return str
+        }
+    }
 
+    fun shortDescription(str: String, itemView: View?): String?{
+        val maxLength = 20
+
+        //shorten cuisine string logic
+        if(str.length > maxLength){
+            val shortDesc = StringBuilder()
+            shortDesc.append(str.substring(0, maxLength))
+            shortDesc.append("...")
+            itemView?.cuisine_tv?.text = shortDesc.toString()
+            return shortDesc.toString()
+        } else{
+            itemView?.cuisine_tv?.text = str
+            return str
+        }
+    }
+
+    fun checkStatus(str: String, itemView: View?){
+        //check if status has time
+        if(str.contains("Pre")){
+            itemView?.asaptime_tv?.text = ""
+        } else{
+            itemView?.asaptime_tv?.text = str
+        }
+    }
 }
