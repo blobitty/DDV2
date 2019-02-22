@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         managePermissions = ManagePermissions(this, Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_LOCATION_CODE)
-        runtimeLocationCheck()
         viewModel = ViewModelProviders.of(this)[RestaurantViewModel::class.java]
+        runtimeLocationCheck()
 
     }
     private fun showRestaurants(restaurants: List<Restaurant>) {
@@ -53,7 +53,17 @@ class MainActivity : AppCompatActivity() {
             managePermissions.checkPermissions()
 
         } else {
-
+            viewModel.fusedLocationClient = FusedLocationProviderClient(this)
+            viewModel.getRestaurants()
+                .observe(this,
+                    Observer<RestaurantViewModel.NetworkResult<List<Restaurant>>> { restaurants ->
+                        if (restaurants != null) {
+                            when (restaurants) {
+                                is RestaurantViewModel.NetworkResult.Success -> showRestaurants(restaurants.data)
+                                is RestaurantViewModel.NetworkResult.Error -> showError()
+                            }
+                        }
+                    })
         }
     }
 

@@ -12,6 +12,7 @@ class RestaurantListViewHolder(itemView: View?, private val navigator: Restauran
 
     fun onBind(restaurant: Restaurant){
 
+
         itemView.restaurantname?.text = restaurant.name
         itemView.cuisine_tv?.text = restaurant.description
         itemView.asaptime_tv?.text = restaurant.status
