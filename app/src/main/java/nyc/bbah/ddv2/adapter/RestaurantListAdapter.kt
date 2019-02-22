@@ -6,14 +6,16 @@ import android.view.ViewGroup
 import nyc.bbah.ddv2.model.Restaurant
 import nyc.bbah.ddv2.viewholder.RestaurantListViewHolder
 import nyc.bbah.ddv2.R.layout
+import nyc.bbah.ddv2.RestaurantsNavigator
 
-class RestaurantListAdapter(val items: List<Restaurant>) : RecyclerView.Adapter<RestaurantListViewHolder>() {
+class RestaurantListAdapter(private val items: List<Restaurant>,
+                            private val navigator: RestaurantsNavigator) : RecyclerView.Adapter<RestaurantListViewHolder>() {
 
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RestaurantListViewHolder {
         return RestaurantListViewHolder(LayoutInflater
             .from(p0.context)
-            .inflate(layout.discoverlist_itemview, p0, false))
+            .inflate(layout.discoverlist_itemview, p0, false), navigator)
     }
 
     override fun onBindViewHolder(p0: RestaurantListViewHolder, p1: Int) {

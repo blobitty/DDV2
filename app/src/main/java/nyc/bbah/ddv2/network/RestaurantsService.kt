@@ -1,5 +1,6 @@
 package nyc.bbah.ddv2.network
 
+import io.reactivex.Single
 import nyc.bbah.ddv2.model.Restaurant
 import retrofit2.Call
 import retrofit2.http.GET
@@ -10,10 +11,10 @@ interface RestaurantsService {
 
     @GET("restaurant/")
     fun fetchRestaurantList(@Query("lat") lat: Double?, @Query("lng") lng: Double?,
-                            @Query("offset") offset: Int, @Query("limit") limit: Int): Call<List<Restaurant>>
+                            @Query("offset") offset: Int, @Query("limit") limit: Int): Single<List<Restaurant>>
 
     @GET("restaurant/{restaurant_id}")
-    fun fetchSingleRestaurant(@Path("restaurant_id") restaurant_id: Int): Call<Restaurant>
+    fun fetchSingleRestaurant(@Path("restaurant_id") restaurant_id: Int): Single<Restaurant>
 
     //compan
     object ApiUtils {

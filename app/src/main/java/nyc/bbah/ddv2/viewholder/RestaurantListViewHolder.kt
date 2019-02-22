@@ -4,9 +4,10 @@ import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.View
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.discoverlist_itemview.view.*
+import nyc.bbah.ddv2.RestaurantsNavigator
 import nyc.bbah.ddv2.model.Restaurant
 
-class RestaurantListViewHolder(itemView: View?): ViewHolder(itemView!!) {
+class RestaurantListViewHolder(itemView: View?, private val navigator: RestaurantsNavigator): ViewHolder(itemView!!) {
 
 
     fun onBind(restaurant: Restaurant){
@@ -21,5 +22,10 @@ class RestaurantListViewHolder(itemView: View?): ViewHolder(itemView!!) {
             .get()
             .load(imgUrl)
             .into(itemView.restaurantlist_imageView)
+
+        //TODO: Extra Credit
+//        itemView.setOnClickListener {
+//            navigator.openDetail(restaurant)
+//        }
     }
 }
