@@ -16,7 +16,7 @@ interface RestaurantsService {
     @GET("restaurant/{restaurant_id}")
     fun fetchSingleRestaurant(@Path("restaurant_id") restaurant_id: Int): Single<Restaurant>
 
-    //compan
+
     object ApiUtils {
 
         private const val BASE_URL = "https://api.doordash.com//v2/"

@@ -23,8 +23,6 @@ class ManagePermissions(val activity: Activity, val list: String, val code:Int) 
 
     // Check permissions status
     private fun isPermissionsGranted(): Int {
-        // PERMISSION_GRANTED : Constant Value: 0
-        // PERMISSION_DENIED : Constant Value: -1
         return ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION )
 
 

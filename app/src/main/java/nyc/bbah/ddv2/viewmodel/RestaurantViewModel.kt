@@ -17,6 +17,7 @@ class RestaurantViewModel : ViewModel(){
 
     lateinit var fusedLocationClient: FusedLocationProviderClient
     var restaurantsRepository = RestaurantsRepository(RestaurantsService.ApiUtils.restaurant_Service)
+    private val restaurants: MutableLiveData<NetworkResult<List<Restaurant>>> = MutableLiveData()
 
 
     sealed class NetworkResult<T> {
@@ -25,7 +26,6 @@ class RestaurantViewModel : ViewModel(){
         class Error<T>(val throwable: Throwable) : NetworkResult<T>()
     }
 
-    private val restaurants: MutableLiveData<NetworkResult<List<Restaurant>>> = MutableLiveData()
 
     fun getRestaurants(): LiveData<NetworkResult<List<Restaurant>>> {
         if (restaurants.value == null) {
