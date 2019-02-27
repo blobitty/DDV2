@@ -11,7 +11,7 @@ import retrofit2.Response
 class RestaurantsRepository(private val restaurantsService: RestaurantsService) {
 
     fun restaurantListCall(lat: Double?, lng: Double?, offset: Int, limit: Int): Single<List<Restaurant>> {
-        return restaurantsService.fetchRestaurantList(lat, lng, offset, limit)
+        return restaurantsService.fetchRestawurantList(lat, lng, offset, limit)
     }
 
     fun singleRestaurantCall(restaurant_id: Int, onSuccess: (Restaurant) -> Unit): Single<Restaurant> {

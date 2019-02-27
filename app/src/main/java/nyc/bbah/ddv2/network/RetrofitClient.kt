@@ -26,7 +26,7 @@ object RetrofitClient {
             retrofit = Retrofit.Builder()
                 .client(client)
                 .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())  //AdapterFactory allows us to make calls using RxJava with Retrofit
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build()
         }

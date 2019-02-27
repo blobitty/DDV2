@@ -31,11 +31,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //Handle permission request logic
         managePermissions = ManagePermissions(this, Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_LOCATION_CODE)
         viewModel = ViewModelProviders.of(this)[RestaurantViewModel::class.java]
         runtimeLocationCheck()
 
     }
+    //initialize our RecyclerView of Restaurants
     private fun showRestaurants(restaurants: List<Restaurant>) {
         val navigator = RestaurantsNavigator(this)
         val restaurantListAdapter = RestaurantListAdapter(restaurants, navigator)
@@ -48,14 +50,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun runtimeLocationCheck(){
+            //Check permissions at runtime to see if request is granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
+            //If not granted then change permisisions in device settings (w/ intent)
             managePermissions.checkPermissions()
-
-        } else {
+        } else {  //if permission is granted then get location
             viewModel.fusedLocationClient = FusedLocationProviderClient(this)
             viewModel.getRestaurants()
-                .observe(this,
+                .observe(this, //observe this activity lifecycle and viewmodel for changes
                     Observer<RestaurantViewModel.NetworkResult<List<Restaurant>>> { restaurants ->
                         if (restaurants != null) {
                             when (restaurants) {
@@ -74,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             REQUEST_LOCATION_CODE ->{
                 val isPermissionsGranted = managePermissions
                     .processPermissionsResult(requestCode,permissions,grantResults)
-
+                //If the permissions request was granted then make and observe the same location and network call as previous method
                 if(isPermissionsGranted){
                     // Do task
                     Toast.makeText(this, "Permission Granted", Toast.LENGTH_LONG).show()

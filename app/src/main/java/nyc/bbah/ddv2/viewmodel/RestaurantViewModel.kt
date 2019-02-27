@@ -44,7 +44,7 @@ class RestaurantViewModel : ViewModel(){
                 } //takes location Single and returns a SingleSource holding our response body or list: List<Restaurant>
         }.flatMap { location ->
             restaurantsRepository.restaurantListCall(location.latitude, location.longitude, 0, 50)
-        }.subscribe({ location ->
+        }.subscribe({ location -> //when Single emits onSucces or onError notification do task
             // success //adds a task to the main thread to assign this value to restaurants
             restaurants.postValue(NetworkResult.Success(location))
 
